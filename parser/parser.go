@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"poth/team"
 	"regexp"
 	"strings"
 )
@@ -9,7 +10,7 @@ var messagePattern = regexp.MustCompile(`^\[(TH-\d+)\]\[(.*)\](.*)`)
 
 //Commit with its relevant data, authors and card number
 type Commit struct {
-	Authors []string
+	Authors team.Pair
 	Card    string
 }
 
@@ -17,14 +18,14 @@ type Commit struct {
 func Parse(message string) Commit {
 	matchingResult := matchMessage(message)
 	return Commit{
-		Authors: readAuthors(matchingResult),
+		Authors: readPair(matchingResult),
 		Card:    readCard(matchingResult),
 	}
 }
 
-func readAuthors(matchingResult []string) []string {
-	authorsFromMessage := matchingResult[2]
-	return strings.Split(authorsFromMessage, "|")
+func readPair(matchingResult []string) team.Pair {
+	authorsFromMessage := strings.Split(matchingResult[2], "|")
+	return team.PairWith(authorsFromMessage...)
 }
 
 func readCard(matchingResult []string) string {
