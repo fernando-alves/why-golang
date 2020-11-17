@@ -50,3 +50,26 @@ func TestShouldReadRegularCardNumber(t *testing.T) {
 		t.Errorf("Expected author to be %v, got: %v.", expectedCommit, commit)
 	}
 }
+
+func TestShouldParseMessageWithAuthorsAndCard(t *testing.T) {
+	commitMessage := "[TH-1234][aang] Such a great commit message"
+
+	if !CanParse(commitMessage) {
+		t.Errorf("Expected message %v be valid", commitMessage)
+	}
+}
+func TestShouldNotParseMessageMissingAuthors(t *testing.T) {
+	commitMessage := "[TH-1234][] Such a great commit message"
+
+	if CanParse(commitMessage) {
+		t.Errorf("Expected message %v be invalid", commitMessage)
+	}
+}
+
+func TestShouldNotReadMessageMissingCard(t *testing.T) {
+	commitMessage := "[][aang] Such a great commit message"
+
+	if CanParse(commitMessage) {
+		t.Errorf("Expected message %v be invalid", commitMessage)
+	}
+}

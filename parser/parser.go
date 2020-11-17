@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-var messagePattern = regexp.MustCompile(`^\[(TH-\d+)\]\[(.*)\](.*)`)
+var messagePattern = regexp.MustCompile(`^\[(TH-\d+)\]\[(.+)\](.*)`)
 
 //Commit with its relevant data, authors and card number
 type Commit struct {
@@ -21,6 +21,11 @@ func Parse(message string) Commit {
 		Authors: readPair(matchingResult),
 		Card:    readCard(matchingResult),
 	}
+}
+
+//CanParse check if message can be parsed properly
+func CanParse(message string) bool {
+	return messagePattern.MatchString(message)
 }
 
 func readPair(matchingResult []string) team.Pair {
