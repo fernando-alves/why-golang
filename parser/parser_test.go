@@ -7,11 +7,11 @@ import (
 )
 
 func TestShouldReadCommitMessage(t *testing.T) {
-	commitMessage := "[TH-00][aang] Such a great commit message"
+	commitMessage := "[TRH-00][aang] Such a great commit message"
 
 	expectedCommit := Commit{
 		Authors: team.PairWith("aang"),
-		Card:    "TH-00",
+		Card:    "TRH-00",
 	}
 
 	commit := Parse(commitMessage)
@@ -22,11 +22,11 @@ func TestShouldReadCommitMessage(t *testing.T) {
 }
 
 func TestShouldReadCommitWithMultipleAuthors(t *testing.T) {
-	commitMessage := "[TH-00][aang|katara] Such a great commit message"
+	commitMessage := "[TRH-00][aang|katara] Such a great commit message"
 
 	expectedCommit := Commit{
 		Authors: team.PairWith("aang", "katara"),
-		Card:    "TH-00",
+		Card:    "TRH-00",
 	}
 
 	commit := Parse(commitMessage)
@@ -37,11 +37,11 @@ func TestShouldReadCommitWithMultipleAuthors(t *testing.T) {
 }
 
 func TestShouldReadRegularCardNumber(t *testing.T) {
-	commitMessage := "[TH-1234][aang] Such a great commit message"
+	commitMessage := "[TRH-1234][aang] Such a great commit message"
 
 	expectedCommit := Commit{
 		Authors: team.PairWith("aang"),
-		Card:    "TH-1234",
+		Card:    "TRH-1234",
 	}
 
 	commit := Parse(commitMessage)
@@ -52,14 +52,14 @@ func TestShouldReadRegularCardNumber(t *testing.T) {
 }
 
 func TestShouldParseMessageWithAuthorsAndCard(t *testing.T) {
-	commitMessage := "[TH-1234][aang] Such a great commit message"
+	commitMessage := "[TRH-1234][aang] Such a great commit message"
 
 	if !CanParse(commitMessage) {
 		t.Errorf("Expected message %v be valid", commitMessage)
 	}
 }
 func TestShouldNotParseMessageMissingAuthors(t *testing.T) {
-	commitMessage := "[TH-1234][] Such a great commit message"
+	commitMessage := "[TRH-1234][] Such a great commit message"
 
 	if CanParse(commitMessage) {
 		t.Errorf("Expected message %v be invalid", commitMessage)

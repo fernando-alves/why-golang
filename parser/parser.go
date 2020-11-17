@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-var messagePattern = regexp.MustCompile(`^\[(TH-\d+)\]\[(.+)\](.*)`)
+var messagePattern = regexp.MustCompile(`^\[(TRH-\d+)\]\[(.+)\](.*)`)
 
 //Commit with its relevant data, authors and card number
 type Commit struct {
