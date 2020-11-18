@@ -10,7 +10,7 @@ type Pair interface {
 }
 
 type pair struct {
-	members map[string]bool
+	members *map[string]bool
 }
 
 //Equals compares a pair with other
@@ -27,6 +27,6 @@ func PairWith(members ...string) Pair {
 	}
 
 	return pair{
-		members: pairMembers,
+		members: &pairMembers,
 	}
 }
