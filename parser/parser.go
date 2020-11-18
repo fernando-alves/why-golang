@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"poth/git"
 	"poth/team"
 	"regexp"
 	"strings"
@@ -8,16 +9,10 @@ import (
 
 var messagePattern = regexp.MustCompile(`^\[(TRH-\d+)\]\[(.+)\](.*)`)
 
-//Commit with its relevant data, authors and card number
-type Commit struct {
-	Authors team.Pair
-	Card    string
-}
-
 //Parse message into a commit
-func Parse(message string) Commit {
+func Parse(message string) git.Commit {
 	matchingResult := matchMessage(message)
-	return Commit{
+	return git.Commit{
 		Authors: readPair(matchingResult),
 		Card:    readCard(matchingResult),
 	}

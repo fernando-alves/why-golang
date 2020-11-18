@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"poth/git"
 	"poth/parser"
 	"strings"
 )
@@ -14,7 +15,7 @@ func fromFile(filePath string) []string {
 
 func main() {
 	logEntries := fromFile("commit_history")
-	commits := make([]parser.Commit, 0)
+	commits := make([]git.Commit, 0)
 	rejectedEntries := make([]string, 0)
 	for _, entry := range logEntries {
 		if parser.CanParse(entry) {

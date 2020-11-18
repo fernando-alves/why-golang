@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"poth/git"
 	"poth/team"
 	"reflect"
 	"testing"
@@ -9,7 +10,7 @@ import (
 func TestShouldReadCommitMessage(t *testing.T) {
 	commitMessage := "[TRH-00][aang] Such a great commit message"
 
-	expectedCommit := Commit{
+	expectedCommit := git.Commit{
 		Authors: team.PairWith("aang"),
 		Card:    "TRH-00",
 	}
@@ -24,7 +25,7 @@ func TestShouldReadCommitMessage(t *testing.T) {
 func TestShouldReadCommitWithMultipleAuthors(t *testing.T) {
 	commitMessage := "[TRH-00][aang|katara] Such a great commit message"
 
-	expectedCommit := Commit{
+	expectedCommit := git.Commit{
 		Authors: team.PairWith("aang", "katara"),
 		Card:    "TRH-00",
 	}
@@ -39,7 +40,7 @@ func TestShouldReadCommitWithMultipleAuthors(t *testing.T) {
 func TestShouldReadRegularCardNumber(t *testing.T) {
 	commitMessage := "[TRH-1234][aang] Such a great commit message"
 
-	expectedCommit := Commit{
+	expectedCommit := git.Commit{
 		Authors: team.PairWith("aang"),
 		Card:    "TRH-1234",
 	}
